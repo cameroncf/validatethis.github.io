@@ -1,0 +1,232 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>index - ValidateThis</title>
+  <meta name="author" content="Cameron Childress">
+
+  
+  <meta name="description" content="Index Overview ValidateThis is a validation framework for ColdFusion objects and structures. It is designed to allow a developer to define the &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.validatethis.org/docs/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="ValidateThis" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">ValidateThis</a></h1>
+  
+    <h2>A ColdFusion Validation Framework</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.validatethis.org" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/blog">Blog</a></li>
+  <li><a href="/docs">Documentation</a></li>
+  <li><a href="/download">Download</a></li>
+  <li><a href="/contribute">Contribute</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">Index</h1>
+    <p class="meta">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-07-20T14:42:00-04:00" pubdate data-updated="true"></time></p>
+  </header>
+  
+  <h2>Overview</h2>
+
+<p>ValidateThis is a validation framework for ColdFusion objects and structures. It is designed to allow a developer to define the validation rules for their objects in a succinct fashion, and it will then automatically perform server-side validations and generate client-side validations.</p>
+
+<h2>Goals of the Framework</h2>
+
+<p>The ValidateThis framework is designed with the following goals in mind.
+Flexible Validations
+It should be possible to create an unlimited number of validation types, and any validation type imaginable should be possible. It should be possible to create new validation types without having to touch any of the existing framework code. Examples of validation types that currently ship with the framework are:
+Required - which includes three variations:
+Simple - this property is always required
+Dependent - this property is required if property x is populated
+Dependent with Value - this property is required if property x has a value of y
+Conditional - this property is required if condition x is true
+EqualTo - the value of this property must be equal to the value of property x
+Min - the value of this property must be at least x
+MinLength - the length of this property must be at least x
+Range - the value of this property must be between x and y
+RangeLength - the length of this property must be between x and y
+Numeric - the value of this property must be numeric
+Date - the value of this property must be a date
+Integer - the value of this property must be an integer
+Email - the value of this property must be an Email Address
+Regex - the value of this property must match the specified regex
+Custom - allows for a method to be defined inside the Business Object that returns either true or false
+It should also be possible to create an unlimited number of client-side validation implementations, and a new implementation can be created without having to touch any of the existing framework code. An implementation is a way of converting the business rules into JavaScript code. The framework currently ships with a single JavaScript implementation:
+jQuery Validation Plugin</p>
+
+<p>Code Generation</p>
+
+<p>A developer should be able to define the validation rules in a simple manner in a single location, and the framework will generate all server-side and client-side validation code automatically. Examples of validation rules are:
+UserName is required
+UserName must be between 5 and 10 characters long
+UserName must be unique
+Password must be equal to VerifyPassword
+If ShippingType is &ldquo;Express&rdquo;, a ShippingMethod must be selected
+The framework should be able to generate generic, but specific, validation failure messages, any of which can be overridden by an application developer. Examples of generic failure messages corresponding to the example rules above are:
+The User Name is required.
+The User Name must be between 5 and 10 characters long.
+The User Name must be unique.
+The Password must be the same as the Verify Password.
+The Shipping Method is required when selecting a Shipping Type of &ldquo;Express&rdquo;.
+Flexible Feedback
+The framework should return flexible metadata back to the calling application which will allow for customization of how the validation failures will appear to the end user. This metadata will include more than just the failure messages generated. The framework will not dictate in any way how the view will communicate validation failures to the user.
+Any invalid values supplied by a user should be returned by the Business Object when requested. For example, if one has a Product Business Object with a Price property that can only accept numeric data, if a user provides the value &ldquo;Bob&rdquo; in the Price property of a form, when the Product object is returned to the view, calling getPrice() will return the value &ldquo;Bob&rdquo;. Note: A technique for achieving this is demonstrated in a sample application that ships with the framework, but the framework itself is not involved in &ldquo;saving&rdquo; this invalid data.
+Persistence Layer Agnostic
+It should be possible to implement the framework, without making any modifications, into a model that uses any ORM or no ORM at all. The only requirement is that the model makes use of Business Objects. Note: The framework has been successfully implemented into applications using with Transfer, Reactor and ColdFusion 9&rsquo;s ORM features.
+MVC Framework Agnostic
+It should be possible to implement the framework in any application using any MVC framework. That would include Fusebox, Model-Glue, Mach-II, ColdBox, FW/1 and any homegrown MVC framework. This kind of goes without saying, as the framework is specific to the model layer of your application. Note: A Coldbox plugin has been developed which makes integration of the framework into Coldbox even simpler.</p>
+
+<h2>Installation</h2>
+
+<p>Download the source code from validatethis.riaforge.org.
+Unzip the file into your webroot, or elsewhere and create a mapping called ValidateThis that points to it.
+Note that the download comes with a number of sample applications, demonstrating ValidateThis being integrated into applications in various ways. None of those files and folders are required to make use of the framework - they are just examples.</p>
+
+<h2>Requirements</h2>
+
+<p>ValidateThis can be run on ColdFusion 8.0.1+, and on Railo 3.0.2+. It may run on OpenBD, but hasn&rsquo;t been tested.</p>
+
+<h2>About Team CF Advance</h2>
+
+<p>Team CF Advance is a group of CFML developers who believe the CFML community will continue to grow if we embrace the concepts of cooperation and sharing which are the core of Open Source philosophy. Team CF Advance is focused on developing new — and advancing existing — open source software for ColdFusion / Railo / Lucee.</p>
+
+<p>Developers of all walks of life, skill level and experience are welcome to join the team. Our members enjoy the camaraderie of working on CFML projects of all kinds with developers of all levels. Our members enjoy educating and learning, on topics like CFML best practices, testing your code, server administration and Open Source project management.</p>
+
+<p>So, if you have ideas for an Open Source CFML software or just want to sharpen your skills working with other developers on existing projects, consider joining our ranks. You&rsquo;ll work with like-minded teams of developers towards building quality solutions for the community.</p>
+
+<p><a href="http://teamcfadvance.org/">Read more at www.teamcfadvance.org &raquo;</a></p>
+
+  
+    <footer>
+      <p class="meta">
+        
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-07-20T14:42:00-04:00" pubdate data-updated="true"></time>
+        
+      </p>
+      
+    </footer>
+  
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Cameron Childress -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

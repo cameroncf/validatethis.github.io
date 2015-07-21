@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[ValidateThis]]></title>
+  <link href="http://www.validatethis.org/atom.xml" rel="self"/>
+  <link href="http://www.validatethis.org/"/>
+  <updated>2015-07-20T16:24:16-04:00</updated>
+  <id>http://www.validatethis.org/</id>
+  <author>
+    <name><![CDATA[Cameron Childress]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+</feed>
