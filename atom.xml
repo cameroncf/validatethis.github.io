@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[ValidateThis]]></title>
-  <link href="http://www.validatethis.org/atom.xml" rel="self"/>
-  <link href="http://www.validatethis.org/"/>
-  <updated>2015-07-20T16:24:16-04:00</updated>
-  <id>http://www.validatethis.org/</id>
+  <link href="http://cameroncf.github.io/atom.xml" rel="self"/>
+  <link href="http://cameroncf.github.io/"/>
+  <updated>2015-07-21T09:36:34-04:00</updated>
+  <id>http://cameroncf.github.io/</id>
   <author>
     <name><![CDATA[Cameron Childress]]></name>
     

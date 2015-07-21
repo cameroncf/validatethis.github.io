@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://www.validatethis.org/sitemap.xml 
+Sitemap: http://cameroncf.github.io/sitemap.xml 
