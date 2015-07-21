@@ -1,7 +1,9 @@
 ---
 layout: default
+title: Blog
+footer: false
 ---
-hh
+
 <div class="blog-index">
   {% assign index = true %}
   {% for post in paginator.posts %}
@@ -20,10 +22,3 @@ hh
     {% endif %}
   </div>
 </div>
-<aside class="sidebar">
-  {% if site.blog_index_asides.size %}
-    {% include_array blog_index_asides %}
-  {% else %}
-    {% include_array default_asides %}
-  {% endif %}
-</aside>

@@ -1,2 +1,27 @@
 // This File is imported last, and will override other styles in the cascade
 // Add styles here to make changes without digging in too much
+a.fatty {
+  border-radius: 11px;
+  -moz-border-radius: 11px;
+  -webkit-border-radius: 11px;
+  border: 2px solid $nav-border-bottom;
+  background-color: $nav-bg;
+  //@include background($nav-bg-front, $nav-bg-back);
+  display: inline-block;
+  padding: .4em .8em;
+  margin-right: .5em;
+  text-decoration: none;
+  @extend .serif;
+  padding-top: .35em;
+  padding-bottom: .35em;
+  @include link-colors($nav-color, $nav-color-hover, $visited: $nav-color);
+
+  &:hover {
+    background: darken($nav-bg, 10);
+    color: darken($nav-color-hover, 10);
+  }
+}
+
+.pull-right {
+  float: right !important;
+}

@@ -1,15 +1,18 @@
 ---
 layout: page
 title: "About ValidateThis"
-date: 2015-07-20 15:27
+date: 2015-07-19 03:11
+updated: 2015-07-20 15:28
 comments: false
 sharing: false
 footer: true
 ---
 
-History
+About the Framework
 ---
-ValidateThis was create in 2009 by Bob Silberberg
+ValidateThis is a validation framework for ColdFusion objects. Its main goal is to provide a means of generating both client-side and server-side validations from a set of user-defined business rules.
+
+The ValidateThis freamework project was started in October of 2008 by Bob Silberberg. Since then it has enjoyed contributions from a number of additional contributors.
 
 
 About Team CF Advance
