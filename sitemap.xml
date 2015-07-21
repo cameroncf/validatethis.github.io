@@ -1,24 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://cameroncf.github.io/blog/archives/</loc>
+    <loc>http://cameroncf.github.io/blog/2015/07/21/someone-in-atlanta-likes-raisins/</loc>
+    <lastmod>2015-07-21T10:32:23-04:00</lastmod>
   </url>
   <url>
-    <loc>http://cameroncf.github.io/</loc>
+    <loc>http://cameroncf.github.io/blog/2015/07/21/a-test-os-a-new-blog-posting/</loc>
+    <lastmod>2015-07-21T10:32:03-04:00</lastmod>
+  </url>
+  <url>
+    <loc>http://cameroncf.github.io/blog/archives/</loc>
   </url>
   <url>
     <loc>http://cameroncf.github.io/blog/</loc>
   </url>
   <url>
+    <loc>http://cameroncf.github.io/docs/integrations/cfwheels/</loc>
+  </url>
+  <url>
     <loc>http://cameroncf.github.io/about/</loc>
+  </url>
+  <url>
+    <loc>http://cameroncf.github.io/contribute/</loc>
+  </url>
+  <url>
+    <loc>http://cameroncf.github.io/docs/facade/client/</loc>
+  </url>
+  <url>
+    <loc>http://cameroncf.github.io/docs/facade/result/</loc>
+  </url>
+  <url>
+    <loc>http://cameroncf.github.io/docs/facade/server/</loc>
+  </url>
+  <url>
+    <loc>http://cameroncf.github.io/docs/examples/objecttype-discovery/</loc>
+  </url>
+  <url>
+    <loc>http://cameroncf.github.io/docs/integrations/bo/</loc>
   </url>
   <url>
     <loc>http://cameroncf.github.io/docs/</loc>
   </url>
   <url>
+    <loc>http://cameroncf.github.io/docs/integrations/coldbox/</loc>
+  </url>
+  <url>
+    <loc>http://cameroncf.github.io/</loc>
+  </url>
+  <url>
+    <loc>http://cameroncf.github.io/docs/integrations/mvc/</loc>
+  </url>
+  <url>
+    <loc>http://cameroncf.github.io/docs/integrations/modelglue/</loc>
+  </url>
+  <url>
+    <loc>http://cameroncf.github.io/support/</loc>
+  </url>
+  <url>
+    <loc>http://cameroncf.github.io/docs/integrations/orm/</loc>
+  </url>
+  <url>
+    <loc>http://cameroncf.github.io/docs/rules/json/</loc>
+  </url>
+  <url>
+    <loc>http://cameroncf.github.io/docs/rules/orm/</loc>
+  </url>
+  <url>
+    <loc>http://cameroncf.github.io/docs/rules/upgrade-pre-98/</loc>
+  </url>
+  <url>
+    <loc>http://cameroncf.github.io/docs/rules/validationtypes/</loc>
+  </url>
+  <url>
+    <loc>http://cameroncf.github.io/docs/rules/xml/</loc>
+  </url>
+  <url>
+    <loc>http://cameroncf.github.io/docs/setup/configuration/</loc>
+  </url>
+  <url>
+    <loc>http://cameroncf.github.io/docs/setup/installation/</loc>
+  </url>
+  <url>
     <loc>http://cameroncf.github.io/download/</loc>
   </url>
   <url>
-    <loc>http://cameroncf.github.io/contribute/</loc>
+    <loc>http://cameroncf.github.io/docs/integrations/internationalization/</loc>
+  </url>
+  <url>
+    <loc>http://cameroncf.github.io/docs/integrations/frameworkone/</loc>
   </url>
 </urlset>

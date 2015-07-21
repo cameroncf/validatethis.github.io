@@ -4,7 +4,7 @@
   <title><![CDATA[ValidateThis]]></title>
   <link href="http://cameroncf.github.io/atom.xml" rel="self"/>
   <link href="http://cameroncf.github.io/"/>
-  <updated>2015-07-21T09:36:34-04:00</updated>
+  <updated>2015-07-21T17:24:37-04:00</updated>
   <id>http://cameroncf.github.io/</id>
   <author>
     <name><![CDATA[Cameron Childress]]></name>
@@ -12,5 +12,29 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Someone in Atlanta Likes Raisins]]></title>
+    <link href="http://cameroncf.github.io/blog/2015/07/21/someone-in-atlanta-likes-raisins/"/>
+    <updated>2015-07-21T10:32:23-04:00</updated>
+    <id>http://cameroncf.github.io/blog/2015/07/21/someone-in-atlanta-likes-raisins</id>
+    <content type="html"><![CDATA[<p>It&rsquo;s true they do!
+hi</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A Test Os a New Blog Posting]]></title>
+    <link href="http://cameroncf.github.io/blog/2015/07/21/a-test-os-a-new-blog-posting/"/>
+    <updated>2015-07-21T10:32:03-04:00</updated>
+    <id>http://cameroncf.github.io/blog/2015/07/21/a-test-os-a-new-blog-posting</id>
+    <content type="html"><![CDATA[<p>No way! this is a first post!</p>
+
+<!-- more -->
+
+
+<p>This is the inside content!</p>
+]]></content>
+  </entry>
   
 </feed>
