@@ -8,7 +8,7 @@ sharing: false
 footer: true
 ---
 
-Read The Manual
+Documentation
 ---
 The best first stop when you are having a problem is the [Documentation]({{ root_url }}/docs). If what you were looking for is missing in the documentation, please consider [submitting an addition or correction]({{ root_url }}/contribute) to the docs.
 
