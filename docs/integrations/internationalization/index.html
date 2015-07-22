@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Index - ValidateThis</title>
+  <title>Internationalization With ValidateThis - ValidateThis</title>
   <meta name="author" content="Cameron Childress">
 
   
-  <meta name="description" content="Index Updated: Jul 21st, 2015 5:20 pm Getting Started Installation Configuration The Facade Object Client Side Validation Server Side Validation The &hellip;">
+  <meta name="description" content="Internationalization With ValidateThis ValidateThis has been designed to be able to translate failure messages into multiple languages. By default &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,7 +71,7 @@
 <article role="article">
   
   <header>
-    <h1 class="entry-title">Index</h1>
+    <h1 class="entry-title">Internationalization With ValidateThis</h1>
     <!-- <p class="meta">
 
 
@@ -80,7 +80,83 @@
 <time class='entry-date' datetime='2015-07-21T17:20:00-04:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>5:20 pm</span></time></p> -->
   </header>
   
-  
+  <p>ValidateThis has been designed to be able to translate failure messages into multiple languages. By default this translation facility is turned off, but it can be enabled by specifying some additional keys in the ValidateThisConfig Struct when creating the ValidateThis Facade Object.</p>
+
+<p><strong>ValidateThisConfig Keys for Translations</strong></p>
+
+<p>To enable automatic translations using resource bundles you use the following keys in your ValidateThisConfig Struct when you create the ValidateThis Facade Object:</p>
+
+<p><em>translatorPath</em></p>
+
+<p>This points to the component that will act as the translator for failure messages. Specify a value of ValidateThis.core.RBTranslator to enable the translator that makes use of resource bundles. If you&rsquo;d prefer to use a different scheme (e.g., database-driven translations) then you can create your own translator object and provide the path to it.</p>
+
+<p><em>localeLoaderPath</em></p>
+
+<p>This points to the component that will load all of the resource bundles into the framework cache when it is instantiated. Specify a value of ValidateThis.core.RBLocaleLoader to enable the translator that makes use of resource bundles. As above, this can be overridden if you have your own way of loading resource bundles.</p>
+
+<p><em>localeMap</em></p>
+
+<p>This is a structure that contains information about which locales the application is to support, and their corresponding resource bundle property files. See below for an example.</p>
+
+<p><em>defaultLocale</em></p>
+
+<p>This optional key specifies the default locale that will be used by the framework if none is passed to method calls. By default it has the value of en_US, which is English.</p>
+
+<p><em>Example</em></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;cfset localeMap = {en_US="/rbs/en_US.properties",fr_FR="/rbs/fr_FR.properties"} /&gt;
+</span><span class='line'>&lt;cfset validateThisConfig = {definitionPath="/i18nDemo/model/",jsRoot="/js/"} /&gt;
+</span><span class='line'>&lt;cfset validateThisConfig.translatorPath = "ValidateThis.core.RBTranslator" /&gt;
+</span><span class='line'>&lt;cfset validateThisConfig.localeLoaderPath = "ValidateThis.core.RBLocaleLoader" /&gt;
+</span><span class='line'>&lt;cfset validateThisConfig.localeMap = localeMap /&gt;
+</span><span class='line'>&lt;cfset application.ValidateThis = createObject("component","ValidateThis.ValidateThis").init(validateThisConfig) /&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This would create an instance of the ValidateThis Facade Object in the application scope with support for English (en_US) and French (fr_FR).</p>
+
+<p><strong>Performing Server-Side Validations</strong></p>
+
+<p>In order to generate default failure messages in the appropriate language, you&rsquo;ll need to pass the current locale into the call to validate(). Note that if the current request is using the default locale you do not have to pass that in, as the default value of the locale argument is the defaultLocale as defined in the ValidateThisConfig Struct. After calling validate() and getting a Result object returned, when you call methods on the Result object you need to pass in the locale argument to the method in order to get failure messages back in the locale of your choosing. For example:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;cfset result = application.ValidateThis.validate(theobject=myObject,locale="fr_FR") /&gt;
+</span><span class='line'>&lt;cfset failures = result.getFailures(locale="fr_FR") /&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This would return an array of all validation failures in which each failure&rsquo;s message was translated into French.</p>
+
+<p><strong>Generating Client-Side Validations</strong></p>
+
+<p>The only difference when generating client-side validations for a specific language is that you pass in a locale argument to the methods. For example:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;cfset initScript = application.ValidateThis.getInitializationScript(locale="fr_FR") /&gt;
+</span><span class='line'>&lt;cfset theScript = application.ValidateThis.getValidationScript(theObject=myObject,locale="fr_FR") /&gt;
+</span><span class='line'>&lt;cfhtmlhead text="#initScript#" /&gt;
+</span><span class='line'>&lt;cfhtmlhead text="#theScript#" /&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This would generate (and output via the calls to cfhtmlhead) the Javascript necessary for client-side validations, with failure messages in French.</p>
+
+<p><strong>Creating Resource Bundles</strong></p>
+
+<p>When you create resource bundles for all of your supported languages, you should include keys for all of the default generated failure messages. These are included in the file /ValidateThis/locales/en_US.properties. If you do not do this then the framework will be unable to generate default failure messages. If you do not want to use any of the default messages (i.e., you specify a failureMessage attribute for each and every rule) then you do not need to worry about this.</p>
+
+<p><strong>Creating Custom Translators</strong></p>
+
+<p>As mentioned above, the framework has been designed to allow you to override the Translator that is used to translate failure messages. The only Translator that is currently included in the framework is one that uses resource bundles. If you would like to use a different translation scheme (e.g., store translations in a database, use a webservice, etc.), you can create your own Translator.</p>
+
+<p>Take a look at the BaseTranslator, RBTranslator, BaseLocaleLoader and RBLocaleLoader for guidance on producing your own. If you require any assistance please feel free to contact us for support.</p>
 
   
     <footer>
@@ -114,7 +190,7 @@ Updated: <time class='updated' datetime='2015-07-21T17:20:00-04:00'><span class=
     <section>
 <h3>Getting Started</h3>
 <ul>
-	<li class="menu"><a href="/docs/setup/installation">Installation</a></li>
+	<li class="menu"><a href="/docs/setup/installation">Installation &amp; Setup</a></li>
 	<li class="menu"><a href="/docs/setup/configuration">Configuration</a></li>
 </ul>
 
@@ -127,6 +203,7 @@ Updated: <time class='updated' datetime='2015-07-21T17:20:00-04:00'><span class=
 
 <h3>Validation Rules</h3>
 <ul>
+	<li class="menu"><a href="/docs/rules">Basics</a></li>
 	<li class="menu"><a href="/docs/rules/validationtypes">List of Validation Types</a></li>
 	<li class="menu"><a href="/docs/rules/json">Rules as JSON</a></li>
 	<li class="menu"><a href="/docs/rules/xml">Rules as XML</a></li>
@@ -144,6 +221,13 @@ Updated: <time class='updated' datetime='2015-07-21T17:20:00-04:00'><span class=
 	<li class="menu"><a href="/docs/integrations/modelglue">ValidateThis w/ModelGlue</a></li>
 	<li class="menu"><a href="/docs/integrations/mvc">ValidateThis w/MVC</a></li>
 	<li class="menu"><a href="/docs/integrations/orm">ValidateThis w/ORM</a></li>
+</ul>
+
+<h3>Extending ValidateThis</h3>
+<ul>
+	<li class="menu"><a href="/docs/extending/new-validation-types">Creating New Validation Types</a></li>
+	<li class="menu"><a href="/docs/extending/new-js-implementation">Creating New JS Implementations</a></li>
+	<li class="menu"><a href="/docs/extending/custom-validation-type">The Custom Validation Type</a></li>
 </ul>
 
 <h3>Examples</h3>

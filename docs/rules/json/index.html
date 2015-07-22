@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Index - ValidateThis</title>
+  <title>Sample Rules Definition File - ValidateThis</title>
   <meta name="author" content="Cameron Childress">
 
   
-  <meta name="description" content="Index Updated: Jul 21st, 2015 5:19 pm Getting Started Installation Configuration The Facade Object Client Side Validation Server Side Validation The &hellip;">
+  <meta name="description" content="Sample Rules Definition File The following is an example of an XML rules definition file that demonstrates all of the elements and attributes that &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,7 +71,7 @@
 <article role="article">
   
   <header>
-    <h1 class="entry-title">Index</h1>
+    <h1 class="entry-title">Sample Rules Definition File</h1>
     <!-- <p class="meta">
 
 
@@ -80,7 +80,889 @@
 <time class='entry-date' datetime='2015-07-21T17:19:00-04:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>5:19 pm</span></time></p> -->
   </header>
   
-  
+  <p>The following is an example of an XML rules definition file that demonstrates all of the elements and attributes that are available in the xml schema. It also illustrates a number of validation types. A version of the file in JSON format which describes the exact same rules follows the XML file. The complete files are listed, followed by excerpts from the files with a more detailed description of each section.</p>
+
+<p><strong>The Complete XML File</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+</span><span class='line'>&lt;validateThis xsi:noNamespaceSchemaLocation="validateThis.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+</span><span class='line'>  &lt;conditions&gt;
+</span><span class='line'>      &lt;condition name="MustLikeSomething"
+</span><span class='line'>          serverTest="getLikeCheese() EQ 0 AND getLikeChocolate() EQ 0"
+</span><span class='line'>          clientTest="$("[name='LikeCheese']").getValue() == 0 && $("[name='LikeChocolate']").getValue() == 0;" /&gt;
+</span><span class='line'>  &lt;/conditions&gt;
+</span><span class='line'>  &lt;contexts&gt;
+</span><span class='line'>      &lt;context name="Register" formName="frmRegister" /&gt;
+</span><span class='line'>      &lt;context name="Profile" formName="frmProfile" /&gt;
+</span><span class='line'>  &lt;/contexts&gt;
+</span><span class='line'>  &lt;objectProperties&gt;
+</span><span class='line'>      &lt;property name="UserName" desc="Email Address"&gt;
+</span><span class='line'>          &lt;rule type="required" contexts="*" /&gt;
+</span><span class='line'>          &lt;rule type="email" failureMessage="Hey, buddy, you call that an Email Address?" /&gt;
+</span><span class='line'>      &lt;/property&gt;
+</span><span class='line'>      &lt;property name="Nickname"&gt;
+</span><span class='line'>          &lt;rule type="custom" failureMessage="That Nickname is already taken.  Please try a different Nickname."&gt;
+</span><span class='line'>              &lt;param name="methodname" value="CheckDupNickname" /&gt;
+</span><span class='line'>              &lt;param name="remoteURL" value="CheckDupNickname.cfm" /&gt;
+</span><span class='line'>          &lt;/rule&gt;
+</span><span class='line'>      &lt;/property&gt;
+</span><span class='line'>      &lt;property name="UserPass" desc="Password"&gt;
+</span><span class='line'>          &lt;rule type="required" /&gt;
+</span><span class='line'>          &lt;rule type="rangelength"&gt;
+</span><span class='line'>              &lt;param name="minlength" value="5" /&gt;
+</span><span class='line'>              &lt;param name="maxlength" value="10" /&gt;
+</span><span class='line'>          &lt;/rule&gt;
+</span><span class='line'>      &lt;/property&gt;
+</span><span class='line'>      &lt;property name="VerifyPassword"&gt;
+</span><span class='line'>          &lt;rule type="required" /&gt;
+</span><span class='line'>          &lt;rule type="equalTo"&gt;
+</span><span class='line'>              &lt;param name="ComparePropertyName" value="UserPass" /&gt;
+</span><span class='line'>          &lt;/rule&gt;
+</span><span class='line'>      &lt;/property&gt;
+</span><span class='line'>      &lt;property name="UserGroup" clientfieldname="UserGroupId"&gt;
+</span><span class='line'>          &lt;rule type="required" /&gt;
+</span><span class='line'>      &lt;/property&gt;
+</span><span class='line'>      &lt;property name="Salutation"&gt;
+</span><span class='line'>          &lt;rule type="required" contexts="Profile" /&gt;
+</span><span class='line'>          &lt;rule type="regex"
+</span><span class='line'>              failureMessage="Only Dr, Prof, Mr, Mrs, Ms, or Miss (with or without a period) are allowed."&gt;
+</span><span class='line'>              &lt;param name="Regex" value="^(Dr|Prof|Mr|Mrs|Ms|Miss)(\.)?$" /&gt;
+</span><span class='line'>          &lt;/rule&gt;
+</span><span class='line'>      &lt;/property&gt;
+</span><span class='line'>      &lt;property name="FirstName"&gt;
+</span><span class='line'>          &lt;rule type="required" contexts="Profile" /&gt;
+</span><span class='line'>      &lt;/property&gt;
+</span><span class='line'>      &lt;property name="LastName"&gt;
+</span><span class='line'>          &lt;rule type="required" contexts="Profile" /&gt;
+</span><span class='line'>          &lt;rule type="required" contexts="Register"&gt;
+</span><span class='line'>              &lt;param name="DependentPropertyName" value="FirstName" /&gt;
+</span><span class='line'>          &lt;/rule&gt;
+</span><span class='line'>      &lt;/property&gt;
+</span><span class='line'>      &lt;property name="LikeOther" desc="What do you like?"&gt;
+</span><span class='line'>          &lt;rule type="required" condition="MustLikeSomething"
+</span><span class='line'>              failureMessage="If you don't like Cheese and you don't like Chocolate, you must like something!"&gt;
+</span><span class='line'>          &lt;/rule&gt;
+</span><span class='line'>      &lt;/property&gt;
+</span><span class='line'>      &lt;property name="HowMuch" desc="How much money would you like?"&gt;
+</span><span class='line'>          &lt;rule type="numeric" /&gt;
+</span><span class='line'>      &lt;/property&gt;
+</span><span class='line'>      &lt;property name="AllowCommunication" desc="May we send you information?"/&gt;
+</span><span class='line'>      &lt;property name="CommunicationMethod"&gt;
+</span><span class='line'>          &lt;rule type="required"
+</span><span class='line'>              failureMessage="If you are allowing communication, you must choose a communication method."&gt;
+</span><span class='line'>              &lt;param name="DependentPropertyName" value="AllowCommunication" /&gt;
+</span><span class='line'>              &lt;param name="DependentPropertyValue" value="1" /&gt;
+</span><span class='line'>          &lt;/rule&gt;
+</span><span class='line'>      &lt;/property&gt;
+</span><span class='line'>  &lt;/objectProperties&gt;
+</span><span class='line'>&lt;/validateThis&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>JSON Format File</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{"validateThis" : {
+</span><span class='line'>  "conditions" : [
+</span><span class='line'>      {"name":"MustLikeSomething",
+</span><span class='line'>          "serverTest":"getLikeCheese() EQ 0 AND getLikeChocolate() EQ 0",
+</span><span class='line'>          "clientTest":"$("[name='LikeCheese']").getValue() == 0 && $("[name='LikeChocolate']").getValue() == 0;"
+</span><span class='line'>      }
+</span><span class='line'>  ],
+</span><span class='line'>
+</span><span class='line'>  "contexts" : [
+</span><span class='line'>      {"name":"Register","formName":"frmRegister"},
+</span><span class='line'>      {"name":"Profile","formName":"frmProfile"}
+</span><span class='line'>  ],
+</span><span class='line'>
+</span><span class='line'>  "objectProperties" : [
+</span><span class='line'>      {"name":"UserName","desc":"Email Address",
+</span><span class='line'>          "rules": [
+</span><span class='line'>              {"type":"required","contexts":"*"},
+</span><span class='line'>              {"type":"email","failureMessage":"Hey, buddy, you call that an Email Address?"}
+</span><span class='line'>          ]
+</span><span class='line'>      },
+</span><span class='line'>      {"name":"Nickname",
+</span><span class='line'>          "rules" : [
+</span><span class='line'>              {"type":"custom","failureMessage":"That Nickname is already taken. Please try another",
+</span><span class='line'>                  "params":[
+</span><span class='line'>                      {"name":"methodName","value":"CheckDupNickname"},
+</span><span class='line'>                      {"name":"remoteURL","value":"CheckDupNickname.cfm"}
+</span><span class='line'>                  ]
+</span><span class='line'>              }
+</span><span class='line'>          ]
+</span><span class='line'>      },
+</span><span class='line'>      {"name":"UserPass","desc":"Password",
+</span><span class='line'>          "rules" : [
+</span><span class='line'>              {"type":"required"},
+</span><span class='line'>              {"type":"rangelength",
+</span><span class='line'>                  "params" : [
+</span><span class='line'>                      {"name":"minlength","value":"5"},
+</span><span class='line'>                      {"name":"maxlength","value":"10"}
+</span><span class='line'>                  ]
+</span><span class='line'>              }
+</span><span class='line'>          ]
+</span><span class='line'>      },
+</span><span class='line'>      {"name":"VerifyPassword",
+</span><span class='line'>          "rules" : [
+</span><span class='line'>              {"type":"required"},
+</span><span class='line'>              {"type":"equalTo",
+</span><span class='line'>                  "params" : [
+</span><span class='line'>                      {"name":"ComparePropertyName","value":"UserPass"}
+</span><span class='line'>                  ]
+</span><span class='line'>              }
+</span><span class='line'>          ]
+</span><span class='line'>      },
+</span><span class='line'>      {"name":"UserGroup","clientFieldName":"UserGroupID",
+</span><span class='line'>          "rules" : [
+</span><span class='line'>              {"type":"required"}
+</span><span class='line'>          ]
+</span><span class='line'>      },
+</span><span class='line'>      {"name":"Salutation",
+</span><span class='line'>          "rules" : [
+</span><span class='line'>              {"type":"required","contexts":"Profile"},
+</span><span class='line'>              {"type":"regex","failureMessage":"Only Dr, Prof, Mr, Mrs, Ms, or Miss (with or without a period) are allowed.",
+</span><span class='line'>                  "params" : [
+</span><span class='line'>                      {"name":"Regex","value":"^(Dr|Prof|Mr|Mrs|Ms|Miss)(\\.)?$"}
+</span><span class='line'>                  ]
+</span><span class='line'>              }
+</span><span class='line'>          ]
+</span><span class='line'>      },
+</span><span class='line'>      {"name":"FirstName",
+</span><span class='line'>          "rules" : [
+</span><span class='line'>              {"type":"required"}
+</span><span class='line'>          ]
+</span><span class='line'>      },
+</span><span class='line'>      {"name":"LastName",
+</span><span class='line'>          "rules" : [
+</span><span class='line'>              {"type":"required","contexts":"Profile"},
+</span><span class='line'>              {"type":"required","contexts":"Register",
+</span><span class='line'>                  "params" : [
+</span><span class='line'>                      {"name":"DependentPropertyName","value":"FirstName"}
+</span><span class='line'>                  ]
+</span><span class='line'>              }
+</span><span class='line'>          ]
+</span><span class='line'>      },
+</span><span class='line'>      {"name":"LikeOther","desc":"What do you like?",
+</span><span class='line'>          "rules" : [
+</span><span class='line'>              {"type":"required","condition":"MustLikeSomething","failureMessage":"If you don't like cheese and you don't like chocolate, you must like something!"}
+</span><span class='line'>          ]
+</span><span class='line'>      },
+</span><span class='line'>      {"name":"HowMuch","desc":"How much money would you like?",
+</span><span class='line'>          "rules" : [
+</span><span class='line'>              {"type":"numeric"}
+</span><span class='line'>          ]
+</span><span class='line'>      },
+</span><span class='line'>      {"name":"AllowCommunication","desc":"May we send you information?"
+</span><span class='line'>      },
+</span><span class='line'>      {"name":"CommunicationMethod",
+</span><span class='line'>          "rules" : [
+</span><span class='line'>              {"type":"required","failureMessage":"if you are allowing communication, you must choose a method",
+</span><span class='line'>                  "params" : [
+</span><span class='line'>                      {"name":"DependentPropertyName","value":"AllowCommunication"},
+</span><span class='line'>                      {"name":"DependentPropertyValue","value":"1"}
+</span><span class='line'>                  ]
+</span><span class='line'>              }
+</span><span class='line'>          ]
+</span><span class='line'>      }
+</span><span class='line'>  ]
+</span><span class='line'>}
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>The conditions Element</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;conditions&gt;
+</span><span class='line'>  &lt;condition name="MustLikeSomething"
+</span><span class='line'>      serverTest="getLikeCheese() EQ 0 AND getLikeChocolate() EQ 0"
+</span><span class='line'>      clientTest="$("[name='LikeCheese']").getValue() == 0 && $("[name='LikeChocolate']").getValue() == 0;" /&gt;
+</span><span class='line'>&lt;/conditions&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>"conditions" : [
+</span><span class='line'>  {"name":"MustLikeSomething",
+</span><span class='line'>      "serverTest":"getLikeCheese() EQ 0 AND getLikeChocolate() EQ 0",
+</span><span class='line'>      "clientTest":"$("[name='LikeCheese']").getValue() == 0 && $("[name='LikeChocolate']").getValue() == 0;"
+</span><span class='line'>  }
+</span><span class='line'>]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here we are defining one condition, and giving it a unique name of MustLikeSomething. We then specify how the condition is to be evaluated on both the server and the client.</p>
+
+<p>In the case of the server we are saying:</p>
+
+<p>&ldquo;This condition is met when the value of getLikeCheese() is zero and the value of getLikeChocolate() is zero.&rdquo;</p>
+
+<p>While on the client we are saying:</p>
+
+<p>&ldquo;This condition is met when the value of the html element with a name attribute of LikeCheese is zero and the value of the html element with a name attribute of LikeChocolate is zero.&rdquo;</p>
+
+<p>Note that because we are placing actual JavaScript code into an xml attribute / json string we must escape the special characters.</p>
+
+<p>This condition, MustLikeSomething will be used in a rule definition later in the file.</p>
+
+<p><strong>The contexts Element</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;contexts&gt;
+</span><span class='line'>  &lt;context name="Register" formName="frmRegister" /&gt;
+</span><span class='line'>  &lt;context name="Profile" formName="frmProfile" /&gt;
+</span><span class='line'>&lt;/contexts&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>&ldquo;contexts&rdquo; : [
+    {&ldquo;name&rdquo;:&ldquo;Register&rdquo;,&ldquo;formName&rdquo;:&ldquo;frmRegister&rdquo;},
+    {&ldquo;name&rdquo;:&ldquo;Profile&rdquo;,&ldquo;formName&rdquo;:&ldquo;frmProfile&rdquo;}
+]</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>Here we are defining two contexts and pointing them at particular forms. We are doing this because each form has a unique name, and specifying these here, in the configuration file, means that we won't have to specify the form name when asking the framework to generate client-side validations for us.
+</span><span class='line'>
+</span><span class='line'>If the forms had the same name, e.g., frmUser, there would be no reason to include this contexts element at all. It is not required to make use of contexts for validation rules, its sole purpose is to point a context at a particular form.
+</span><span class='line'>
+</span><span class='line'>**The objectProperties Element**
+</span><span class='line'>
+</span><span class='line'>We define all of the properties that the framework needs to know about in the objectProperties element. There are two reasons that a property might need to be defined to the framework:
+</span><span class='line'>
+</span><span class='line'>1. It requires that validation rules be defined for it.
+</span><span class='line'>2. It needs a description recorded for it. E.g., if it relates to another property with a rule (e.g., via an equalTo rule type).
+</span><span class='line'>
+</span><span class='line'>Each property's rules is followed by a textual description of what the element implies.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><property name="UserName" desc="Email Address">
+    <rule type="required" contexts="*" />
+    <rule type="email" failureMessage="Hey, buddy, you call that an Email Address?" />
+</property></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>```
+</span><span class='line'>{"name":"UserName","desc":"Email Address",
+</span><span class='line'>  "rules": [
+</span><span class='line'>      {"type":"required","contexts":"*"},
+</span><span class='line'>      {"type":"email","failureMessage":"Hey, buddy, you call that an Email Address?"}
+</span><span class='line'>  ]
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>The descriptive name of the property is Email Address.</li>
+<li>The UserName property is required, and must be a valid email address.</li>
+<li>Both rules apply to all contexts. Note that you can indicate that a rule belongs to all contexts by specifying contexts=&ldquo;*&rdquo; or by simply leaving the context attribute out of the definition.</li>
+<li>If the UserName does not contain a valid email address, the message &ldquo;Hey, buddy, you call that an Email Address?&rdquo; should be returned.</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;property name="Nickname"&gt;
+</span><span class='line'>  &lt;rule type="custom" failureMessage="That Nickname is already taken.  Please try a different Nickname."&gt;
+</span><span class='line'>      &lt;param name="methodname" value="CheckDupNickname" /&gt;
+</span><span class='line'>      &lt;param name="remoteURL" value="CheckDupNickname.cfm" /&gt;
+</span><span class='line'>  &lt;/rule&gt;
+</span><span class='line'>&lt;/property&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{"name":"Nickname",
+</span><span class='line'>  "rules" : [
+</span><span class='line'>      {"type":"custom","failureMessage":"That Nickname is already taken. Please try another",
+</span><span class='line'>          "params":[
+</span><span class='line'>              {"name":"methodName","value":"CheckDupNickname"},
+</span><span class='line'>              {"name":"remoteURL","value":"CheckDupNickname.cfm"}
+</span><span class='line'>          ]
+</span><span class='line'>      }
+</span><span class='line'>  ]
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>The Nickname property will be tested on both the client and the server. On the server the method CheckDupNickname(), which resides in the User Business Object, will be evaluated. On the client, an ajax call will be made to the url CheckDupNickname.cfm, with the result being evaluated by the jQuery plugin.</li>
+<li>The custom rule applies to all contexts (because the contexts attribute is missing).</li>
+<li>If the custom validation fails, the message &ldquo;That Nickname is already taken. Please try a different Nickname.&rdquo; should be returned.</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;property name="UserPass" desc="Password"&gt;
+</span><span class='line'>  &lt;rule type="required" /&gt;
+</span><span class='line'>  &lt;rule type="rangelength"&gt;
+</span><span class='line'>      &lt;param name="minlength" value="5" /&gt;
+</span><span class='line'>      &lt;param name="maxlength" value="10" /&gt;
+</span><span class='line'>  &lt;/rule&gt;
+</span><span class='line'>&lt;/property&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{"name":"UserPass","desc":"Password",
+</span><span class='line'>  "rules" : [
+</span><span class='line'>      {"type":"required"},
+</span><span class='line'>      {"type":"rangelength",
+</span><span class='line'>          "params" : [
+</span><span class='line'>              {"name":"minlength","value":"5"},
+</span><span class='line'>              {"name":"maxlength","value":"10"}
+</span><span class='line'>          ]
+</span><span class='line'>      }
+</span><span class='line'>  ]
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>The descriptive name of the property is Password.</li>
+<li>The UserPass property is required, and must be between 5 and 10 characters long.</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;property name="VerifyPassword"&gt;
+</span><span class='line'>  &lt;rule type="required" /&gt;
+</span><span class='line'>  &lt;rule type="equalTo"&gt;
+</span><span class='line'>      &lt;param name="ComparePropertyName" value="UserPass" /&gt;
+</span><span class='line'>  &lt;/rule&gt;
+</span><span class='line'>&lt;/property&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{"name":"VerifyPassword",
+</span><span class='line'>  "rules" : [
+</span><span class='line'>      {"type":"required"},
+</span><span class='line'>      {"type":"equalTo",
+</span><span class='line'>          "params" : [
+</span><span class='line'>              {"name":"ComparePropertyName","value":"UserPass"}
+</span><span class='line'>          ]
+</span><span class='line'>      }
+</span><span class='line'>  ]
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Note that although the descriptive name of the property is Verify Password, whereas the property name is VerifyPassword (without a space), we do not have to supply a desc attribute in this scenario as the framework is smart enough to add appropriate spaces when a property name is camelCased.</li>
+<li>The VerifyPassword property is required, and must be the same as the UserPass property.</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;property name="UserGroup" clientfieldname="UserGroupId"&gt;
+</span><span class='line'>  &lt;rule type="required" /&gt;
+</span><span class='line'>&lt;/property&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{"name":"UserGroup","clientFieldName":"UserGroupID",
+</span><span class='line'>  "rules" : [
+</span><span class='line'>      {"type":"required"}
+</span><span class='line'>  ]
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>The name of the form field which will contain the value to be evaluated is UserGroupId.</li>
+<li>The UserGroup property is required.</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;property name="Salutation"&gt;
+</span><span class='line'>  &lt;rule type="required" contexts="Profile" /&gt;
+</span><span class='line'>  &lt;rule type="regex"
+</span><span class='line'>      failureMessage="Only Dr, Prof, Mr, Mrs, Ms, or Miss (with or without a period) are allowed."&gt;
+</span><span class='line'>      &lt;param name="Regex" value="^(Dr|Prof|Mr|Mrs|Ms|Miss)(\.)?$" /&gt;
+</span><span class='line'>  &lt;/rule&gt;
+</span><span class='line'>&lt;/property&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{"name":"Salutation",
+</span><span class='line'>  "rules" : [
+</span><span class='line'>      {"type":"required","contexts":"Profile"},
+</span><span class='line'>      {"type":"regex","failureMessage":"Only Dr, Prof, Mr, Mrs, Ms, or Miss (with or without a period) are allowed.",
+</span><span class='line'>          "params" : [
+</span><span class='line'>              {"name":"Regex","value":"^(Dr|Prof|Mr|Mrs|Ms|Miss)(\\.)?$"}
+</span><span class='line'>          ]
+</span><span class='line'>      }
+</span><span class='line'>  ]
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>The Salutation property is required, but only in the context of Profile.</li>
+<li>The Salutation property must conform to a regular expression.</li>
+<li>If the Salutation does not conform to the regular expression, the message &ldquo;Only Dr, Prof, Mr, Mrs, Ms, or Miss (with or without a period) are allowed.&rdquo; should be returned.</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;property name="FirstName"&gt;
+</span><span class='line'>  &lt;rule type="required" contexts="Profile" /&gt;
+</span><span class='line'>&lt;/property&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{"name":"FirstName",
+</span><span class='line'>  "rules" : [
+</span><span class='line'>      {"type":"required"}
+</span><span class='line'>  ]
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>The FirstName property is required, but only in the context of Profile.</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;property name="LastName"&gt;
+</span><span class='line'>  &lt;rule type="required" contexts="Profile" /&gt;
+</span><span class='line'>  &lt;rule type="required" contexts="Register"&gt;
+</span><span class='line'>      &lt;param name="DependentPropertyName" value="FirstName" /&gt;
+</span><span class='line'>  &lt;/rule&gt;
+</span><span class='line'>&lt;/property&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{"name":"LastName",
+</span><span class='line'>  "rules" : [
+</span><span class='line'>      {"type":"required","contexts":"Profile"},
+</span><span class='line'>      {"type":"required","contexts":"Register",
+</span><span class='line'>          "params" : [
+</span><span class='line'>              {"name":"DependentPropertyName","value":"FirstName"}
+</span><span class='line'>          ]
+</span><span class='line'>      }
+</span><span class='line'>  ]
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>The LastName property is always required in the context of Profile, and is also required in the context of Register, but only if a FirstName has also been specified.</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;property name="LikeOther" desc="What do you like?"&gt;
+</span><span class='line'>  &lt;rule type="required" condition="MustLikeSomething"
+</span><span class='line'>      failureMessage="If you don't like Cheese and you don't like Chocolate, you must like something!"&gt;
+</span><span class='line'>  &lt;/rule&gt;
+</span><span class='line'>&lt;/property&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{"name":"LikeOther","desc":"What do you like?",
+</span><span class='line'>  "rules" : [
+</span><span class='line'>      {"type":"required","condition":"MustLikeSomething","failureMessage":"If you don't like cheese and you don't like chocolate, you must like something!"}
+</span><span class='line'>  ]
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>The descriptive name of the property is What do you like?.</li>
+<li>The LikeOther property is required in all contexts, but only if the condition MustLikeSomething evaluates to true. Note that that condition was defined in the conditions element described above.</li>
+<li>If the LikeOther is not provided, the message &ldquo;If you don&rsquo;t like Cheese and you don&rsquo;t like Chocolate, you must like something!&rdquo; should be returned.</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;property name="HowMuch" desc="How much money would you like?"&gt;
+</span><span class='line'>  &lt;rule type="numeric" /&gt;
+</span><span class='line'>&lt;/property&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{"name":"HowMuch","desc":"How much money would you like?",
+</span><span class='line'>  "rules" : [
+</span><span class='line'>      {"type":"numeric"}
+</span><span class='line'>  ]
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>The descriptive name of the property is How much money would you like?.</li>
+<li>The HowMuch property must contain a numeric value.</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;property name="AllowCommunication" desc="May we send you information?"/&gt;
+</span><span class='line'>&lt;property name="CommunicationMethod"&gt;
+</span><span class='line'>  &lt;rule type="required"
+</span><span class='line'>      failureMessage="If you are allowing communication, you must choose a communication method."&gt;
+</span><span class='line'>      &lt;param name="DependentPropertyName" value="AllowCommunication" /&gt;
+</span><span class='line'>      &lt;param name="DependentPropertyValue" value="1" /&gt;
+</span><span class='line'>  &lt;/rule&gt;
+</span><span class='line'>&lt;/property&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{"name":"AllowCommunication","desc":"May we send you information?"
+</span><span class='line'>},
+</span><span class='line'>{"name":"CommunicationMethod",
+</span><span class='line'>  "rules" : [
+</span><span class='line'>      {"type":"required","failureMessage":"if you are allowing communication, you must choose a method",
+</span><span class='line'>          "params" : [
+</span><span class='line'>              {"name":"DependentPropertyName","value":"AllowCommunication"},
+</span><span class='line'>              {"name":"DependentPropertyValue","value":"1"}
+</span><span class='line'>          ]
+</span><span class='line'>      }
+</span><span class='line'>  ]
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>The descriptive name of the AllowCommunication property is May we send you information?. Note that this property does not have any rules assigned to it, but is being defined so that the rule that makes use of it (defined on the CommunicationMethod property) can generate a friendly validation failure message.</li>
+<li>The CommunicationMethod property is required in all contexts, but only if the AllowCommunication property has been assigned a value of 1.</li>
+<li>If the CommunicationMethod is not provided, the message &ldquo;If you are allowing communication, you must choose a communication method.&rdquo; should be returned.</li>
+</ul>
+
 
   
     <footer>
@@ -114,7 +996,7 @@ Updated: <time class='updated' datetime='2015-07-21T17:19:00-04:00'><span class=
     <section>
 <h3>Getting Started</h3>
 <ul>
-	<li class="menu"><a href="/docs/setup/installation">Installation</a></li>
+	<li class="menu"><a href="/docs/setup/installation">Installation &amp; Setup</a></li>
 	<li class="menu"><a href="/docs/setup/configuration">Configuration</a></li>
 </ul>
 
@@ -127,6 +1009,7 @@ Updated: <time class='updated' datetime='2015-07-21T17:19:00-04:00'><span class=
 
 <h3>Validation Rules</h3>
 <ul>
+	<li class="menu"><a href="/docs/rules">Basics</a></li>
 	<li class="menu"><a href="/docs/rules/validationtypes">List of Validation Types</a></li>
 	<li class="menu"><a href="/docs/rules/json">Rules as JSON</a></li>
 	<li class="menu"><a href="/docs/rules/xml">Rules as XML</a></li>
@@ -144,6 +1027,13 @@ Updated: <time class='updated' datetime='2015-07-21T17:19:00-04:00'><span class=
 	<li class="menu"><a href="/docs/integrations/modelglue">ValidateThis w/ModelGlue</a></li>
 	<li class="menu"><a href="/docs/integrations/mvc">ValidateThis w/MVC</a></li>
 	<li class="menu"><a href="/docs/integrations/orm">ValidateThis w/ORM</a></li>
+</ul>
+
+<h3>Extending ValidateThis</h3>
+<ul>
+	<li class="menu"><a href="/docs/extending/new-validation-types">Creating New Validation Types</a></li>
+	<li class="menu"><a href="/docs/extending/new-js-implementation">Creating New JS Implementations</a></li>
+	<li class="menu"><a href="/docs/extending/custom-validation-type">The Custom Validation Type</a></li>
 </ul>
 
 <h3>Examples</h3>

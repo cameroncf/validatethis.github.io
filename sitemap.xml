@@ -15,49 +15,61 @@
     <loc>http://cameroncf.github.io/blog/</loc>
   </url>
   <url>
-    <loc>http://cameroncf.github.io/docs/integrations/cfwheels/</loc>
+    <loc>http://cameroncf.github.io/docs/integrations/bo/</loc>
   </url>
   <url>
     <loc>http://cameroncf.github.io/about/</loc>
   </url>
   <url>
-    <loc>http://cameroncf.github.io/contribute/</loc>
+    <loc>http://cameroncf.github.io/docs/examples/objecttype-discovery/</loc>
+  </url>
+  <url>
+    <loc>http://cameroncf.github.io/docs/extending/custom-validation-type/</loc>
+  </url>
+  <url>
+    <loc>http://cameroncf.github.io/docs/extending/new-js-implementation/</loc>
+  </url>
+  <url>
+    <loc>http://cameroncf.github.io/docs/extending/new-validation-types/</loc>
   </url>
   <url>
     <loc>http://cameroncf.github.io/docs/facade/client/</loc>
   </url>
   <url>
+    <loc>http://cameroncf.github.io/contribute/</loc>
+  </url>
+  <url>
     <loc>http://cameroncf.github.io/docs/facade/result/</loc>
-  </url>
-  <url>
-    <loc>http://cameroncf.github.io/docs/facade/server/</loc>
-  </url>
-  <url>
-    <loc>http://cameroncf.github.io/docs/examples/objecttype-discovery/</loc>
-  </url>
-  <url>
-    <loc>http://cameroncf.github.io/docs/integrations/bo/</loc>
   </url>
   <url>
     <loc>http://cameroncf.github.io/docs/</loc>
   </url>
   <url>
-    <loc>http://cameroncf.github.io/docs/integrations/coldbox/</loc>
+    <loc>http://cameroncf.github.io/docs/facade/server/</loc>
+  </url>
+  <url>
+    <loc>http://cameroncf.github.io/docs/integrations/cfwheels/</loc>
   </url>
   <url>
     <loc>http://cameroncf.github.io/</loc>
   </url>
   <url>
-    <loc>http://cameroncf.github.io/docs/integrations/mvc/</loc>
+    <loc>http://cameroncf.github.io/docs/integrations/modelglue/</loc>
   </url>
   <url>
-    <loc>http://cameroncf.github.io/docs/integrations/modelglue/</loc>
+    <loc>http://cameroncf.github.io/docs/integrations/internationalization/</loc>
   </url>
   <url>
     <loc>http://cameroncf.github.io/support/</loc>
   </url>
   <url>
+    <loc>http://cameroncf.github.io/docs/integrations/mvc/</loc>
+  </url>
+  <url>
     <loc>http://cameroncf.github.io/docs/integrations/orm/</loc>
+  </url>
+  <url>
+    <loc>http://cameroncf.github.io/docs/rules/</loc>
   </url>
   <url>
     <loc>http://cameroncf.github.io/docs/rules/json/</loc>
@@ -84,9 +96,9 @@
     <loc>http://cameroncf.github.io/download/</loc>
   </url>
   <url>
-    <loc>http://cameroncf.github.io/docs/integrations/internationalization/</loc>
+    <loc>http://cameroncf.github.io/docs/integrations/frameworkone/</loc>
   </url>
   <url>
-    <loc>http://cameroncf.github.io/docs/integrations/frameworkone/</loc>
+    <loc>http://cameroncf.github.io/docs/integrations/coldbox/</loc>
   </url>
 </urlset>

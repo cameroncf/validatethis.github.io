@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Index - ValidateThis</title>
+  <title>Upgrading Your Rules Definition Files - ValidateThis</title>
   <meta name="author" content="Cameron Childress">
 
   
-  <meta name="description" content="Index Updated: Jul 21st, 2015 5:19 pm Getting Started Installation Configuration The Facade Object Client Side Validation Server Side Validation The &hellip;">
+  <meta name="description" content="Upgrading Your Rules Definition Files The format required for rules definition files changed in ValidateThis 0.98, in a way that makes older rules &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,7 +71,7 @@
 <article role="article">
   
   <header>
-    <h1 class="entry-title">Index</h1>
+    <h1 class="entry-title">Upgrading Your Rules Definition Files</h1>
     <!-- <p class="meta">
 
 
@@ -80,7 +80,109 @@
 <time class='entry-date' datetime='2015-07-21T17:19:00-04:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>5:19 pm</span></time></p> -->
   </header>
   
-  
+  <p>The format required for rules definition files changed in ValidateThis 0.98, in a way that makes older rules definition files incompatible. If you are upgrading from a version prior to 0.98 please read this page for more information about the change and a tip for easily upgrading your files using Eclipse.</p>
+
+<p><strong>Changes to the Param Element</strong></p>
+
+<p>The only piece of metadata that changed its format is the param element. It is now a requirement to specify a name and value attribute for the param element, whereas prior to version 0.98 neither were required (nor even supported).</p>
+
+<p>To illustrate this change, the following examples of rules using param elements in both the old format and the new format, both in xml and json, have been provided:</p>
+
+<p><em>Old (unsupported) xml format:</em></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;property name="UserPass" desc="Password"&gt;
+</span><span class='line'>  &lt;rule type="rangelength"&gt;
+</span><span class='line'>      &lt;param minlength="5" /&gt;
+</span><span class='line'>      &lt;param maxlength="10" /&gt;
+</span><span class='line'>  &lt;/rule&gt;
+</span><span class='line'>&lt;/property&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p><em>New xml format:</em></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;property name="UserPass" desc="Password"&gt;
+</span><span class='line'>  &lt;rule type="rangelength"&gt;
+</span><span class='line'>      &lt;param name="minlength" value="5" /&gt;
+</span><span class='line'>      &lt;param name="maxlength" value="10" /&gt;
+</span><span class='line'>  &lt;/rule&gt;
+</span><span class='line'>&lt;/property&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p><em>Old (unsupported) json format:</em></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{"name":"UserPass","desc":"Password",
+</span><span class='line'>  "rules" : [
+</span><span class='line'>      {"type":"rangelength",
+</span><span class='line'>          "params" : [
+</span><span class='line'>              {"minlength":"5"},
+</span><span class='line'>              {"maxlength":"10"}
+</span><span class='line'>          ]
+</span><span class='line'>      }
+</span><span class='line'>  ]
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p><em>New json format:</em></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{"name":"UserPass","desc":"Password",
+</span><span class='line'>  "rules" : [
+</span><span class='line'>      {"type":"rangelength",
+</span><span class='line'>          "params" : [
+</span><span class='line'>              {"name":"minlength","value":"5"},
+</span><span class='line'>              {"name":"maxlength","value":"10"}
+</span><span class='line'>          ]
+</span><span class='line'>      }
+</span><span class='line'>  ]
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>What Do I Have to Change?</strong></p>
+
+<p>Based on the format change described above, you&rsquo;ll have to change any rules in your files that use the param element.</p>
+
+<p><strong>Upgrading Your Files Using Eclipse</strong></p>
+
+<p>Marc Esher was kind enough to contribute a regular expression that can be used with Eclipse&rsquo;s find and replace feature. In the dialog, using the following values:</p>
+
+<ul>
+<li>find: &lt;param (.<em>?)=&ldquo;(.</em>?)&rdquo;</li>
+<li>replace: &lt;param name=&ldquo;$1&rdquo; value=&ldquo;$2&rdquo;</li>
+</ul>
+
+
+<p>Make sure the &ldquo;Regular Expressions&rdquo; checkbox is checked.</p>
 
   
     <footer>
@@ -114,7 +216,7 @@ Updated: <time class='updated' datetime='2015-07-21T17:19:00-04:00'><span class=
     <section>
 <h3>Getting Started</h3>
 <ul>
-	<li class="menu"><a href="/docs/setup/installation">Installation</a></li>
+	<li class="menu"><a href="/docs/setup/installation">Installation &amp; Setup</a></li>
 	<li class="menu"><a href="/docs/setup/configuration">Configuration</a></li>
 </ul>
 
@@ -127,6 +229,7 @@ Updated: <time class='updated' datetime='2015-07-21T17:19:00-04:00'><span class=
 
 <h3>Validation Rules</h3>
 <ul>
+	<li class="menu"><a href="/docs/rules">Basics</a></li>
 	<li class="menu"><a href="/docs/rules/validationtypes">List of Validation Types</a></li>
 	<li class="menu"><a href="/docs/rules/json">Rules as JSON</a></li>
 	<li class="menu"><a href="/docs/rules/xml">Rules as XML</a></li>
@@ -144,6 +247,13 @@ Updated: <time class='updated' datetime='2015-07-21T17:19:00-04:00'><span class=
 	<li class="menu"><a href="/docs/integrations/modelglue">ValidateThis w/ModelGlue</a></li>
 	<li class="menu"><a href="/docs/integrations/mvc">ValidateThis w/MVC</a></li>
 	<li class="menu"><a href="/docs/integrations/orm">ValidateThis w/ORM</a></li>
+</ul>
+
+<h3>Extending ValidateThis</h3>
+<ul>
+	<li class="menu"><a href="/docs/extending/new-validation-types">Creating New Validation Types</a></li>
+	<li class="menu"><a href="/docs/extending/new-js-implementation">Creating New JS Implementations</a></li>
+	<li class="menu"><a href="/docs/extending/custom-validation-type">The Custom Validation Type</a></li>
 </ul>
 
 <h3>Examples</h3>

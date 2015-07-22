@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Index - ValidateThis</title>
+  <title>Specifying the objectType on a Method Call - ValidateThis</title>
   <meta name="author" content="Cameron Childress">
 
   
-  <meta name="description" content="Index Updated: Jul 21st, 2015 5:21 pm Getting Started Installation Configuration The Facade Object Client Side Validation Server Side Validation The &hellip;">
+  <meta name="description" content="Specifying the objectType on a Method Call When using the ValidateThis Facade Object, for most method calls it is necessary to let the framework &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,7 +71,7 @@
 <article role="article">
   
   <header>
-    <h1 class="entry-title">Index</h1>
+    <h1 class="entry-title">Specifying the objectType on a Method Call</h1>
     <!-- <p class="meta">
 
 
@@ -80,7 +80,74 @@
 <time class='entry-date' datetime='2015-07-21T17:21:00-04:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>5:21 pm</span></time></p> -->
   </header>
   
-  
+  <p>When using the ValidateThis Facade Object, for most method calls it is necessary to let the framework know which objectType you are working with. This objectType corresponds to the filename of your Rules Definition File.</p>
+
+<p>You inform the framework of the objectType in one of two ways:</p>
+
+<ul>
+<li>You pass a value for objectType as an argument to the method.</li>
+<li>You pass in the object, and the framework determines the objectType for you.</li>
+</ul>
+
+
+<p><strong>Passing in the objectType Argument</strong></p>
+
+<p>This is the most straightforward method, although also the most verbose in some situations. You simply pass the name of the objectType into the method, like so:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;cfset Result = application.ValidateThis.validate(theObject=myObject,objectType='User') /&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This explicitly tells the framework that the Rules Definition File is called User.xml (or User.xml.cfm).</p>
+
+<p><strong>Allowing the Framework to Determine the objectType</strong></p>
+
+<p>In this scenario you pass the object itself to the framework, and the framework then attempts to determine the objectType. The framework will do two things to make this determination:</p>
+
+<ol>
+<li>If the object contains a method called getobjectType(), the framework will call that method and use the returned value as the objectType. This allows you to define the objectType within the business object itself, using CFML code.</li>
+<li>Otherwise the framework will look at the metadata of the object and use the final part of its dot delimited name as the objectType.</li>
+</ol>
+
+
+<p><em>Example 1:</em></p>
+
+<p>I have a component called UserObject.cfc, which I instantiate to create a User object. That cfc contains a method called getObjectType() with the following code:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;cffunction name="getObjectType" access="public" output="false" returntype="any"&gt;
+</span><span class='line'>  &lt;cfreturn "myUser" /&gt;
+</span><span class='line'>&lt;/cffunction&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If I call validate() passing in only this object, like so:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;cfset Result = application.ValidateThis.validate(theObject=User) /&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The framework will look for a Rules Definition File called myUser.xml, because myUser is the value returned from getObjectType().</p>
+
+<p>Example 2:
+I have a component called UserObject.cfc, which I instantiate to create a User object. That cfc does not contain a method called getObjectType().
+If I call validate() passing in only this object, like so:
+<cfset Result = application.ValidateThis.validate(theObject=User) />
+The framework will look for a Rules Definition File called UserObject.xml, because UserObject is the filename of the cfc.</p>
+
+<p><strong>Keeping It Simple</strong></p>
+
+<p>The above may seem very complicated, and the options only exist to provide a developer with maximum flexibility. To keep things simple it is recommended that one adopts one of the above approaches and sticks with it throughout their application code.</p>
+
+<p>To summarize, the following three options exist for telling the framework the name of your Rules Definition File.</p>
+
+<ul>
+<li>Pass it into each method using the objectType argument.</li>
+<li>Create a getObjectType() method in your business objects that returns the objectType value.</li>
+<li>Use the same name for your business object cfcs as you do for your Rules Definition File, and the framework will match them up.</li>
+</ul>
+
 
   
     <footer>
@@ -114,7 +181,7 @@ Updated: <time class='updated' datetime='2015-07-21T17:21:00-04:00'><span class=
     <section>
 <h3>Getting Started</h3>
 <ul>
-	<li class="menu"><a href="/docs/setup/installation">Installation</a></li>
+	<li class="menu"><a href="/docs/setup/installation">Installation &amp; Setup</a></li>
 	<li class="menu"><a href="/docs/setup/configuration">Configuration</a></li>
 </ul>
 
@@ -127,6 +194,7 @@ Updated: <time class='updated' datetime='2015-07-21T17:21:00-04:00'><span class=
 
 <h3>Validation Rules</h3>
 <ul>
+	<li class="menu"><a href="/docs/rules">Basics</a></li>
 	<li class="menu"><a href="/docs/rules/validationtypes">List of Validation Types</a></li>
 	<li class="menu"><a href="/docs/rules/json">Rules as JSON</a></li>
 	<li class="menu"><a href="/docs/rules/xml">Rules as XML</a></li>
@@ -144,6 +212,13 @@ Updated: <time class='updated' datetime='2015-07-21T17:21:00-04:00'><span class=
 	<li class="menu"><a href="/docs/integrations/modelglue">ValidateThis w/ModelGlue</a></li>
 	<li class="menu"><a href="/docs/integrations/mvc">ValidateThis w/MVC</a></li>
 	<li class="menu"><a href="/docs/integrations/orm">ValidateThis w/ORM</a></li>
+</ul>
+
+<h3>Extending ValidateThis</h3>
+<ul>
+	<li class="menu"><a href="/docs/extending/new-validation-types">Creating New Validation Types</a></li>
+	<li class="menu"><a href="/docs/extending/new-js-implementation">Creating New JS Implementations</a></li>
+	<li class="menu"><a href="/docs/extending/custom-validation-type">The Custom Validation Type</a></li>
 </ul>
 
 <h3>Examples</h3>

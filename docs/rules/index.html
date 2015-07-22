@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Index - ValidateThis</title>
+  <title>Defining Validation Rules - ValidateThis</title>
   <meta name="author" content="Cameron Childress">
 
   
-  <meta name="description" content="Index Updated: Jul 21st, 2015 5:19 pm Getting Started Installation &amp; Setup Configuration The Facade Object Client Side Validation Server Side &hellip;">
+  <meta name="description" content="Defining Validation Rules There are currently three means of defining the validation rules for your objects, in an external Rules Definition File, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://cameroncf.github.io/docs/rules/orm/">
+  <link rel="canonical" href="http://cameroncf.github.io/docs/rules/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="ValidateThis" type="application/atom+xml">
@@ -71,16 +71,73 @@
 <article role="article">
   
   <header>
-    <h1 class="entry-title">Index</h1>
+    <h1 class="entry-title">Defining Validation Rules</h1>
     <!-- <p class="meta">
 
 
 
 
-<time class='entry-date' datetime='2015-07-21T17:19:00-04:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>5:19 pm</span></time></p> -->
+<time class='entry-date' datetime='2015-07-21T21:04:00-04:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>9:04 pm</span></time></p> -->
   </header>
   
-  
+  <p>There are currently three means of defining the validation rules for your objects, in an external Rules Definition File, using annotations on property tags and via ColdFusion code.</p>
+
+<h2>Using a Rules Definition File</h2>
+
+<p>Two formats of rules definition files are supported: XML and JSON. Some advantages to recording your rule metadata in an external file (i.e., not inside your business object), include:</p>
+
+<ul>
+<li>The definitions of the validation rules are kept separate from the code of the object itself.</li>
+<li>This provides a couple of benefits:
+
+<ul>
+<li>One can change validation rules without having to open up the object code, which removes the chance of bugs being introduced into the code.</li>
+<li>One can change one&rsquo;s approach to validations for an object (by switching to a different validation framework, for example) without having to make any changes to the object&rsquo;s code.</li>
+</ul>
+</li>
+<li>The xml schema provides a very concise way of describing the validation rules for an object. There is absolutely no duplication of information required.</li>
+<li>If you are using ValidateThis without objects (i.e., validating a structure), this is currently the only option.</li>
+</ul>
+
+
+<p>Details of the metadata that is recorded in a rules definition file can be found in the Rules Definition File reference.</p>
+
+<p>Details of all of the validation types available can be found in the Validation Types Supported By ValidateThis section.</p>
+
+<p>Sample rules definition files, in XML and JSON format, can be found on the Sample Rules Definition File page.</p>
+
+<p>More details on where to place your rules definition files can be found in the How ValidateThis Finds Your Rules Definition Files section.</p>
+
+<h2>Using Property Annotations</h2>
+
+<p>You can add annotations to properties of your objects to define validation rules. These annotations can be in one of three formats: XML, JSON and ValidateThis Markup Language (VTML). More documentation on defining rules using annotations is in the works.</p>
+
+<h2>The addRule() Method</h2>
+
+<p>The addRule() method allows you to add a rule via ColdFusion code. Currently this technique is only supported if you are injecting the ValidateThis framework into your business objects, which will then give your object access to this method. We are looking at ways of making it simpler to define validation rules via CFML, which will eliminate that requirement.</p>
+
+<p>The addRule() method accepts the following arguments:</p>
+
+<ul>
+<li>propertyName The name of the property for which the rule is being defined.</li>
+<li>valType The validation type.</li>
+<li>clientFieldName (optional) The id of the form field that corresponds to the property. Defaults to propertyName.</li>
+<li>propertyDesc (optional) A descriptive name of the property, used in validation failure messages. Defaults to propertyName.</li>
+<li>condition (optional) A structure that contains keys for name, serverTest, clientTest (optional) and desc (optional).</li>
+<li>parameters (optional) A structure that contains one key for each parameter.</li>
+<li>contexts (optional) A list of contexts to which the rule should be added.</li>
+<li>failureMessage (optional) A custom message to be displayed on validation failure.</li>
+<li>formName (optional) The name of the form to which the rules applies.</li>
+</ul>
+
+
+<p>Please see the Rules Definition File reference for a more in-depth description of the above arguments.</p>
+
+<h2>Future Enhancements</h2>
+
+<p>The framework has been designed to allow for additional ways in which to supply the validation metadata. The addition of the JSON and VTML formats makes use of these extensibility features. If you are interested in using an alternate form of metadata, please contact us and we&rsquo;d be happy to help you achieve your goal.</p>
+
+<p>We are currently looking at ways of specifying validation metadata dynamically via CFML.</p>
 
   
     <footer>
@@ -91,7 +148,7 @@
 
 
 
-Updated: <time class='updated' datetime='2015-07-21T17:19:00-04:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>5:19 pm</span></time>
+Updated: <time class='updated' datetime='2015-07-21T21:04:00-04:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>9:04 pm</span></time>
         <!--
 
 <span class="categories">
